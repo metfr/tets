@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ваша тема</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+  <!-- Шапка -->
+  <header class="site-header" role="banner">
+    <div class="brand">
+      <div class="logo">Лого</div>
+      <div>
+        <div class="title">Название</div>
+        <div class="subtitle">Расскажите о чем ваш сайт</div>
+      </div>
+    </div>
+
+    <!-- Правая область шапки -->
+    <div style="display:flex; gap:10px; align-items:center;">
+      <div style="font-size:13px; color:#55636b;">Информация или совет</div>
+    </div>
+  </header>
+
+  <!-- Меню -->
+  <nav class="main-nav" role="navigation">
+    <div class="nav-inner">
+      <div style="font-weight:700; color:#233240;">Меню</div>
+      <ul class="menu" role="menubar" aria-label="Главное меню">
+        <li><a href="#">Главная</a></li>
+        <li><a href="#">Разборы</a></li>
+        <li><a href="#">Справочник</a></li>
+        <li><a href="#">Контакты</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn" href="#">Подписаться</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Контент: посты + правая панель -->
+  <main class="container" role="main">
+
+    <!-- ПОСТЫ -->
+    <section class="posts" aria-label="Последние посты">
+      <!-- Пост 1 -->
+      <article class="post" aria-labelledby="post1">
+        <div class="post-row">
+          <img class="thumb" src="https://picsum.photos/seed/meme1/800/600" alt="картинка">
+          <div>
+            <h3 id="post1">О чем пост</h3>
+            <p class="excerpt">Краткое описание.</p>
+
+            <div class="explain">
+              <strong>Анализ:</strong> Цель поста.
+            </div>
+
+            <div class="comments" aria-label="Комментарии">
+              <div class="comment left"><strong>Андрей:</strong> Комментарий 1</div>
+              <div class="comment right"><strong>Оля:</strong> Комментарий 2</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Пост 2 -->
+      <article class="post" aria-labelledby="post2">
+        <div class="post-row">
+          <img class="thumb" src="https://picsum.photos/seed/meme2/800/600" alt="картинка">
+          <div>
+            <h3 id="post2">Тема второго поста</h3>
+            <p class="excerpt">Коротко: о чем второй пост</p>
+
+            <div class="explain">
+              <strong>Анализ:</strong> Цель поста.
+            </div>
+
+            <div class="comments">
+              <div class="comment left"><strong>Ирина:</strong> Коммент 1</div>
+              <div class="comment right"><strong>Пётр:</strong> Коммент 2</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Пост 3 -->
+      <article class="post" aria-labelledby="post3">
+        <div class="post-row">
+          <img class="thumb" src="https://picsum.photos/seed/meme3/800/600" alt="Картинка">
+          <div>
+            <h3 id="post3">Культурные отсылки</h3>
+            <p class="excerpt">Коротко: отсылки к фильмам/сериалам усиливают эффект, но требуют точной аудитории.</p>
+
+            <div class="explain">
+              <strong>Анализ:</strong> Убедитесь, что отсылка понятна. Если аудитория локальная — используйте локальные референсы; для международной — общие.
+            </div>
+
+            <div class="comments">
+              <div class="comment left"><strong>Мария:</strong> Супер, буду пробовать с отсылками.</div>
+              <div class="comment right"><strong>Дмитрий:</strong> Можно добавить блок с примерами шаблонов?</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ПРАВАЯ ПАНЕЛЬ -->
+    <aside class="sidebar" aria-label="Боковая панель">
+      <!-- Поиск -->
+      <div class="widget search">
+        <h4>Поиск</h4>
+        <input type="search" placeholder="Найти разбор или мем...">
+      </div>
+
+      <!-- Категории -->
+      <div class="widget categories">
+        <h4>Категории</h4>
+        <ul>
+          <li><a href="#">Форматы</a></li>
+          <li><a href="#">Шрифты и текст</a></li>
+          <li><a href="#">История темы</a></li>
+          <li><a href="#">Другие вопросы вопросы</a></li>
+        </ul>
+      </div>
+
+      <!-- Теги -->
+      <div class="widget tags-widget">
+        <h4>Популярные теги</h4>
+        <div class="tags">
+          <span class="tag">#формат</span>
+          <span class="tag">#цитата</span>
+          <span class="tag">#шаблон</span>
+          <span class="tag">#контекст</span>
+        </div>
+      </div>
+
+      <!-- Подписка -->
+      <div class="widget subscribe">
+        <h4>Подписка</h4>
+        <p style="font-size:13px;color:#55636b;margin-bottom:8px;">Получайте новые разборы на почту</p>
+        <input type="email" placeholder="Ваш email" aria-label="Email">
+        <button style="margin-top:8px;padding:9px;border-radius:8px;border:none;background:#233240;color:#fff;font-weight:600;width:100%;">Подписаться</button>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- ФУТЕР -->
+  <footer class="site-footer">
+    © 2025  — обучающий проект. Используйте только добрые и безопасные материалы.
+  </footer>
+
+</body>
+</html>
