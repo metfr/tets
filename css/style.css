@@ -1,0 +1,200 @@
+/* ======= БАЗА (минимум) ======= */
+/* Сброс отступов и базовые настройки */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Основные настройки страницы: шрифт, фон, отступы */
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: #f6f7f8; /* нейтральный светлый фон */
+  color: #222;
+  line-height: 1.45;
+  padding: 16px;
+}
+
+/* Ссылки без подчеркивания по умолчанию */
+a { color: inherit; text-decoration: none; }
+
+
+/* ======= ШАПКА ======= */
+/* Контейнер шапки: выравнивание и отступы */
+.site-header {
+  max-width: 1100px;
+  margin: 0 auto 12px;
+  padding: 14px 16px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #e6e9ec;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Блок с логотипом и названием */
+.brand { display:flex; gap:12px; align-items:center; }
+
+/* Иконка/блок логотипа */
+.logo {
+  width:44px; height:44px;
+  background:#e9eef1;
+  border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700; color:#233240;
+}
+
+/* Название и подзаголовок */
+.title { font-size:18px; font-weight:700; color:#233240; }
+.subtitle { font-size:13px; color:#55636b; opacity:.95; margin-top:2px; }
+
+
+/* ======= МЕНЮ ======= */
+/* Внешний контейнер меню */
+.main-nav {
+  max-width: 1100px;
+  margin: 10px auto;
+  background: #fff;
+  border: 1px solid #e6e9ec;
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+/* Внутреннее выравнивание элементов меню */
+.nav-inner { display:flex; gap:12px; align-items:center; justify-content:space-between; }
+
+/* Список пунктов меню: горизонтально */
+ul.menu { list-style:none; display:flex; gap:8px; align-items:center; }
+
+/* Стили для ссылок в меню */
+ul.menu li a {
+  padding:8px 12px;
+  border-radius:8px;
+  color:#233240;
+  font-weight:600;
+}
+
+/* Эффект при наведении на пункт меню */
+ul.menu li a:hover { background:#f1f5f7; }
+
+/* Кнопка справа (например, подписаться) */
+.btn {
+  padding:8px 10px;
+  border-radius:8px;
+  background:#233240;
+  color:#fff;
+  font-weight:600;
+}
+
+
+/* ======= СЕТКА: КОНТЕНТ + ПРАВАЯ ПАНЕЛЬ ======= */
+/* Основная сетка страницы: контент + правая панель */
+.container {
+  max-width:1100px;
+  margin: 12px auto;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 18px;
+  align-items:start;
+}
+
+
+/* ======= ПОСТЫ ======= */
+/* Секция с постами — вертикальный список */
+.posts { display: grid; gap: 14px; }
+
+/* Оформление карточки поста */
+.post {
+  background:#fff;
+  border:1px solid #e6e9ec;
+  border-radius:10px;
+  padding:12px;
+  box-shadow: 0 6px 16px rgba(12,20,28,0.03);
+}
+
+/* Ряд внутри поста: картинка + текст */
+.post-row { display:flex; gap:12px; align-items:flex-start; }
+
+/* Миниатюра картинки поста */
+.post img.thumb {
+  width:150px; height:100px; object-fit:cover; border-radius:8px; flex-shrink:0;
+  background:#eef1f3;
+}
+
+/* Заголовок поста */
+.post h3 { font-size:18px; margin-bottom:6px; color:#233240; }
+
+/* Короткое описание */
+.post p.excerpt { margin:0; color:#4b5563; font-size:14px; }
+
+/* Блок объяснения/анализа под постом */
+.explain {
+  margin-top:10px;
+  background:#fbfcfd;
+  border-left: 3px solid #e6eef6;
+  padding:10px;
+  border-radius:6px;
+  color:#334155;
+}
+
+
+/* ======= КОММЕНТАРИИ (диалог) ======= */
+/* Контейнер комментариев — вертикальный список */
+.comments { margin-top:10px; display:flex; flex-direction:column; gap:8px; }
+
+/* Общий стиль комментария */
+.comment {
+  padding:8px 12px;
+  border-radius:12px;
+  max-width:80%;
+  font-size:14px;
+}
+
+/* Комментарий слева (один участник диалога) */
+.comment.left { background:#f1f6ff; align-self:flex-start; text-align:left; color:#153462; }
+
+/* Комментарий справа (ответ другого участника) */
+.comment.right { background:#f3fff4; align-self:flex-end; text-align:right; color:#184e2f; }
+
+
+/* ======= ПРАВАЯ ПАНЕЛЬ ======= */
+/* Сбоку виджеты: поиск, категории, теги, подписка */
+.sidebar { display:flex; flex-direction:column; gap:12px; }
+
+.widget {
+  background:#fff; border:1px solid #e6e9ec; border-radius:10px; padding:12px;
+}
+
+/* Заголовки виджетов */
+.widget h4 { margin-bottom:8px; font-size:15px; color:#233240; }
+
+/* Поля ввода (поиск, email) */
+.widget input[type="search"], .widget input[type="email"] {
+  width:100%; padding:8px 10px; border-radius:8px; border:1px solid #dfe7eb; background:#fbfdfe;
+}
+
+/* Список категорий — вертикально */
+.categories ul { list-style:none; padding-left:0; display:flex; flex-direction:column; gap:8px; }
+
+/* Теги — маленькие метки */
+.tags { display:flex; gap:8px; flex-wrap:wrap; }
+.tag { background:#f1f5f7; padding:6px 8px; border-radius:999px; font-size:13px; color:#2b3a42; }
+
+
+/* ======= ФУТЕР ======= */
+/* Подвал страницы */
+.site-footer { max-width:1100px; margin: 18px auto 0; padding:12px; text-align:center; color:#596971; font-size:14px; }
+
+
+/* ======= АДАПТИВ ======= */
+/* Уменьшаем колонку правой панели на средних экранах */
+@media (max-width: 940px) {
+  .container { grid-template-columns: 1fr 300px; }
+}
+
+/* На мобильных — одна колонка, упрощаем меню и раскладку */
+@media (max-width: 720px) {
+  .container { grid-template-columns: 1fr; }
+  ul.menu { display:none; } /* простое поведение на мобиле */
+  .post-row { flex-direction:column; }
+  .post img.thumb { width:100%; height:200px; }
+  .comment { max-width:100%; }
+}
