@@ -1,159 +1,626 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ваша тема</title>
-    <link rel="stylesheet" href="css/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 C# РАКЕТА ЗНАНИЙ</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        :root {
+            --bg: #0a0a1f;
+            --accent: #00ff9d;
+            --text: #fff;
+        }
+        
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            background: linear-gradient(180deg, #0a0a1f 0%, #1a0033 100%);
+            color: var(--text);
+            font-family: 'Press Start 2P', cursive;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        header {
+            background: rgba(0,0,0,0.7);
+            padding: 15px;
+            text-align: center;
+            border-bottom: 4px solid var(--accent);
+            box-shadow: 0 0 20px var(--accent);
+            position: relative;
+        }
+        
+        .home-btn {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: 3px solid var(--accent);
+            color: var(--accent);
+            padding: 8px 18px;
+            font-size: 13px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: var(--accent);
+            color: #000;
+        }
+        
+        h1 {
+            font-size: 28px;
+            text-shadow: 0 0 10px var(--accent);
+        }
+        
+        .subtitle { font-size: 12px; opacity: 0.8; }
+        
+        .container {
+            flex: 1;
+            display: flex;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 20px;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background: rgba(255,255,255,0.05);
+            border: 3px solid var(--accent);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .level-btn {
+            background: #1a0033;
+            border: 3px solid #00ff9d;
+            color: white;
+            padding: 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            border-radius: 8px;
+        }
+        
+        .level-btn:hover {
+            background: #00ff9d;
+            color: #000;
+            transform: scale(1.05);
+        }
+        
+        .level-btn.locked {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        
+        .main {
+            flex: 1;
+            background: rgba(0,0,0,0.6);
+            border: 3px solid var(--accent);
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .hud {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 14px;
+            background: rgba(0,0,0,0.8);
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+        
+        #question-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        #question {
+            font-size: 18px;
+            line-height: 1.5;
+            min-height: 120px;
+            background: #1a0033;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px dashed var(--accent);
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option-btn {
+            background: #2a0055;
+            border: 2px solid #00ff9d;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            font-size: 14px;
+            border-radius: 8px;
+        }
+        
+        .option-btn:hover {
+            background: #00ff9d;
+            color: black;
+        }
+        
+        .fill-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            background: #111;
+            color: white;
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            font-family: monospace;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: auto;
+        }
+        
+        button {
+            flex: 1;
+            padding: 15px;
+            font-size: 16px;
+            background: #00ff9d;
+            color: black;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background: #ff0066;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .feedback {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 42px;
+            padding: 30px 60px;
+            border-radius: 20px;
+            display: none;
+            animation: pop 0.6s;
+            z-index: 100;
+        }
+        
+        @keyframes pop {
+            0% { transform: scale(0.2) translate(-50%, -50%); }
+            100% { transform: scale(1) translate(-50%, -50%); }
+        }
+        
+        .correct { background: #00ff9d; color: black; }
+        .wrong { background: #ff0066; color: white; }
+        
+        .score {
+            font-size: 22px;
+            color: var(--accent);
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+        }
+        
+        .modal-content {
+            background: #1a0033;
+            border: 4px solid var(--accent);
+            width: 90%;
+            max-width: 720px;
+            border-radius: 15px;
+            padding: 30px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 140px;
+            background: #000;
+            color: #0f0;
+            font-family: monospace;
+            font-size: 14px;
+            padding: 15px;
+            border: 2px solid #00ff9d;
+            border-radius: 8px;
+            resize: none;
+        }
+        
+        .compiler-btn {
+            background: #ff0066;
+            color: white;
+            width: 100%;
+            margin: 15px 0;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            opacity: 0.6;
+        }
+        
+        .rocket {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 80px;
+            transition: transform 0.8s;
+        }
+    </style>
 </head>
-
 <body>
-
-  <!-- Шапка -->
-  <header class="site-header" role="banner">
-    <div class="brand">
-      <div class="logo">Лого</div>
-      <div>
-        <div class="title">Название</div>
-        <div class="subtitle">Расскажите о чем ваш сайт</div>
-      </div>
+    <header>
+        <button onclick="goHome()" class="home-btn">🏠 НА ГЛАВНУЮ</button>
+        <h1>🚀 C# РАКЕТА ЗНАНИЙ</h1>
+        <div class="subtitle">Уроки 1–3 • Переменные • Условия • Циклы</div>
+    </header>
+    
+    <div class="container">
+        <!-- БОКОВАЯ ПАНЕЛЬ (главная для всех страниц) -->
+        <div class="sidebar">
+            <h2 style="margin-bottom:15px; text-align:center;">УРОВНИ</h2>
+            
+            <div onclick="startLevel(1)" id="lvl1" class="level-btn">🔰 УРОВЕНЬ 1<br><small>Типы данных + основы</small></div>
+            <div onclick="startLevel(2)" id="lvl2" class="level-btn locked">🛡️ УРОВЕНЬ 2<br><small>Условные конструкции</small></div>
+            <div onclick="startLevel(3)" id="lvl3" class="level-btn locked">🔥 УРОВЕНЬ 3<br><small>Циклы</small></div>
+            
+            <div style="margin-top:auto; padding-top:20px; border-top:2px solid #00ff9d;">
+                <button onclick="showPractice()" style="width:100%; background:#ff0066; color:white;">
+                    💻 РЕЖИМ ПРАКТИКИ КОДА
+                </button>
+            </div>
+            
+            <div class="score" id="total-score">СЧЁТ: <span id="score-val">0</span></div>
+        </div>
+        
+        <!-- ИГРА -->
+        <div class="main" id="game-screen" style="display:none;">
+            <div class="hud">
+                <div>УРОВЕНЬ <span id="level-num">1</span></div>
+                <div>ВОПРОС <span id="q-num">1</span>/7</div>
+                <div class="score">ОЧКИ: <span id="level-score">0</span></div>
+            </div>
+            
+            <div id="question-area">
+                <div id="question"></div>
+                
+                <div class="options" id="mcq-options"></div>
+                <input type="text" id="fill-input" class="fill-input" placeholder="Введи ответ здесь..." style="display:none;">
+                
+                <div class="actions">
+                    <button onclick="submitAnswer()">ПРОВЕРИТЬ</button>
+                    <button onclick="skipQuestion()" style="background:#666;">ПРОПУСТИТЬ</button>
+                </div>
+            </div>
+            
+            <div class="rocket">🚀</div>
+        </div>
     </div>
-
-    <!-- Правая область шапки -->
-    <div style="display:flex; gap:10px; align-items:center;">
-      <div style="font-size:13px; color:#55636b;">Информация или совет</div>
+    
+    <div class="footer">
+        Задачи на закрепление • Режим практики • Онлайн-компилятор • Кнопка «На главную» на каждой странице
     </div>
-  </header>
-
-  <!-- Меню -->
-  <nav class="main-nav" role="navigation">
-    <div class="nav-inner">
-      <div style="font-weight:700; color:#233240;">Меню</div>
-      <ul class="menu" role="menubar" aria-label="Главное меню">
-        <li><a href="#">Главная</a></li>
-        <li><a href="#">Разборы</a></li>
-        <li><a href="#">Справочник</a></li>
-        <li><a href="#">Контакты</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a class="btn" href="#">Подписаться</a>
-      </div>
+    
+    <!-- МОДАЛЬ ПРАКТИКИ -->
+    <div class="modal" id="practice-modal">
+        <div class="modal-content">
+            <h2 style="text-align:center; margin-bottom:20px;">💻 РЕЖИМ ПРАКТИКИ КОДА</h2>
+            
+            <div class="challenge">
+                <strong>Задача 1. Обратный отсчёт</strong><br>
+                <small>Напиши цикл для вывода чисел от N до 1 + Start!</small>
+                <textarea id="code1" placeholder="int n = Convert.ToInt32(Console.ReadLine());&#10;for (...) { ... }"></textarea>
+                <button onclick="checkCode(1)" style="margin-top:8px;">ПРОВЕРИТЬ</button>
+                <button onclick="copyCode(1)" style="margin-top:8px; background:#00ff9d;">📋 Копировать пример</button>
+                <div id="result1" style="margin-top:8px; font-size:13px;"></div>
+            </div>
+            
+            <div class="challenge">
+                <strong>Задача 2. Условие</strong><br>
+                <small>Напиши if-else: если число > 0 — «Положительное», иначе «Отрицательное или ноль»</small>
+                <textarea id="code2" placeholder="if (...) { ... } else { ... }"></textarea>
+                <button onclick="checkCode(2)" style="margin-top:8px;">ПРОВЕРИТЬ</button>
+                <button onclick="copyCode(2)" style="margin-top:8px; background:#00ff9d;">📋 Копировать пример</button>
+                <div id="result2" style="margin-top:8px; font-size:13px;"></div>
+            </div>
+            
+            <div class="challenge">
+                <strong>Задача 3. Пропуск в цикле</strong><br>
+                <small>for (int i = n; i ___ 0; i___)</small>
+                <textarea id="code3" placeholder="i &gt;= 0; i--"></textarea>
+                <button onclick="checkCode(3)" style="margin-top:8px;">ПРОВЕРИТЬ</button>
+                <button onclick="copyCode(3)" style="margin-top:8px; background:#00ff9d;">📋 Копировать пример</button>
+                <div id="result3" style="margin-top:8px; font-size:13px;"></div>
+            </div>
+            
+            <button onclick="openCompiler()" class="compiler-btn">
+                🌐 ОТКРЫТЬ ОНЛАЙН КОМПИЛЯТОР C# (dotnetfiddle.net)
+            </button>
+            
+            <button onclick="hidePractice()" style="width:100%; background:#666;">
+                ЗАКРЫТЬ
+            </button>
+        </div>
     </div>
-  </nav>
-
-  <!-- Контент: посты + правая панель -->
-  <main class="container" role="main">
-
-    <!-- ПОСТЫ -->
-    <section class="posts" aria-label="Последние посты">
-      <!-- Пост 1 -->
-      <article class="post" aria-labelledby="post1">
-        <div class="post-row">
-          <img class="thumb" src="https://picsum.photos/seed/meme1/800/600" alt="картинка">
-          <div>
-            <h3 id="post1">О чем пост</h3>
-            <p class="excerpt">Краткое описание.</p>
-
-            <div class="explain">
-              <strong>Анализ:</strong> Цель поста.
-            </div>
-
-            <div class="comments" aria-label="Комментарии">
-              <div class="comment left"><strong>Андрей:</strong> Комментарий 1</div>
-              <div class="comment right"><strong>Оля:</strong> Комментарий 2</div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Пост 2 -->
-      <article class="post" aria-labelledby="post2">
-        <div class="post-row">
-          <img class="thumb" src="https://picsum.photos/seed/meme2/800/600" alt="картинка">
-          <div>
-            <h3 id="post2">Тема второго поста</h3>
-            <p class="excerpt">Коротко: о чем второй пост</p>
-
-            <div class="explain">
-              <strong>Анализ:</strong> Цель поста.
-            </div>
-
-            <div class="comments">
-              <div class="comment left"><strong>Ирина:</strong> Коммент 1</div>
-              <div class="comment right"><strong>Пётр:</strong> Коммент 2</div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Пост 3 -->
-      <article class="post" aria-labelledby="post3">
-        <div class="post-row">
-          <img class="thumb" src="https://picsum.photos/seed/meme3/800/600" alt="Картинка">
-          <div>
-            <h3 id="post3">Культурные отсылки</h3>
-            <p class="excerpt">Коротко: отсылки к фильмам/сериалам усиливают эффект, но требуют точной аудитории.</p>
-
-            <div class="explain">
-              <strong>Анализ:</strong> Убедитесь, что отсылка понятна. Если аудитория локальная — используйте локальные референсы; для международной — общие.
-            </div>
-
-            <div class="comments">
-              <div class="comment left"><strong>Мария:</strong> Супер, буду пробовать с отсылками.</div>
-              <div class="comment right"><strong>Дмитрий:</strong> Можно добавить блок с примерами шаблонов?</div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-    </section>
-
-    <!-- ПРАВАЯ ПАНЕЛЬ -->
-    <aside class="sidebar" aria-label="Боковая панель">
-      <!-- Поиск -->
-      <div class="widget search">
-        <h4>Поиск</h4>
-        <input type="search" placeholder="Найти разбор или мем...">
-      </div>
-
-      <!-- Категории -->
-      <div class="widget categories">
-        <h4>Категории</h4>
-        <ul>
-          <li><a href="#">Форматы</a></li>
-          <li><a href="#">Шрифты и текст</a></li>
-          <li><a href="#">История темы</a></li>
-          <li><a href="#">Другие вопросы вопросы</a></li>
-        </ul>
-      </div>
-
-      <!-- Теги -->
-      <div class="widget tags-widget">
-        <h4>Популярные теги</h4>
-        <div class="tags">
-          <span class="tag">#формат</span>
-          <span class="tag">#цитата</span>
-          <span class="tag">#шаблон</span>
-          <span class="tag">#контекст</span>
-        </div>
-      </div>
-
-      <!-- Подписка -->
-      <div class="widget subscribe">
-        <h4>Подписка</h4>
-        <p style="font-size:13px;color:#55636b;margin-bottom:8px;">Получайте новые разборы на почту</p>
-        <input type="email" placeholder="Ваш email" aria-label="Email">
-        <button style="margin-top:8px;padding:9px;border-radius:8px;border:none;background:#233240;color:#fff;font-weight:600;width:100%;">Подписаться</button>
-      </div>
-    </aside>
-
-  </main>
-
-  <!-- ФУТЕР -->
-  <footer class="site-footer">
-    © 2025  — обучающий проект. Используйте только добрые и безопасные материалы.
-  </footer>
-
+    
+    <div id="feedback" class="feedback"></div>
+    
+    <script>
+        // === ВОПРОСЫ С ЗАДАЧАМИ НА ЗАКРЕПЛЕНИЕ ===
+        const levels = {
+            1: [
+                { type: "mcq", q: "Какой тип данных в C# используется для целых чисел?", opts: ["string", "int", "double", "bool"], ans: 1 },
+                { type: "fill", q: "string s = \"___\";", hint: "Для хранения текста", ans: "text" },
+                { type: "mcq", q: "Что хранит оперативная память компьютера?", opts: ["Только данные", "Данные и программу", "Только команды"], ans: 1 },
+                { type: "mcq", q: "Для хранения числа с дробной частью используется тип:", opts: ["int", "string", "double", "bool"], ans: 2 },
+                { type: "fill", q: "bool b = ___ ;", ans: "true" },
+                { type: "mcq", q: "Что делает устройство управления?", opts: ["Вычисляет числа", "Следит за последовательностью команд", "Хранит данные"], ans: 1 },
+                { type: "fill", q: "Компьютер не отличает ___ от команды (принцип однородности памяти)", ans: "данные" }
+            ],
+            2: [
+                { type: "fill", q: "if (условие) { ... } ___ { ... }", hint: "Альтернативная ветка", ans: "else" },
+                { type: "mcq", q: "Какой метод Math возвращает модуль числа?", opts: ["Sqrt", "Abs", "Pow", "Round"], ans: 1 },
+                { type: "fill", q: "Math.Abs(___) вернёт 8", ans: "-8" },
+                { type: "mcq", q: "Сокращённый условный оператор не содержит:", opts: ["условие", "else", "действие"], ans: 1 },
+                { type: "fill", q: "Math.Pow(2, ___) = 8", ans: "3" },
+                { type: "mcq", q: "Для финансовых расчётов с высокой точностью используется тип:", opts: ["double", "float", "decimal"], ans: 2 },
+                { type: "fill", q: "Ссылочные типы могут быть равны ___", ans: "null" }
+            ],
+            3: [
+                { type: "mcq", q: "Какой цикл используется, когда заранее известно количество повторений?", opts: ["while", "do-while", "for"], ans: 2 },
+                { type: "fill", q: "for (int i = n; i ___ 0; i___)", ans: ">= ; --" },
+                { type: "mcq", q: "Цикл do { ... } while(условие); выполняется минимум:", opts: ["0 раз", "1 раз", "бесконечно"], ans: 1 },
+                { type: "fill", q: "while (i ___ 10)", ans: "<" },
+                { type: "mcq", q: "В задаче «Старт ракеты» можно использовать:", opts: ["только for", "только while", "все три типа циклов"], ans: 2 },
+                { type: "mcq", q: "Какой цикл всегда имеет счётчик?", opts: ["while", "do-while", "for"], ans: 2 },
+                { type: "fill", q: "Цикл с постусловием начинается с ___", ans: "do" }
+            ]
+        };
+        
+        let currentLevel = 1;
+        let currentQ = 0;
+        let levelScore = 0;
+        let totalScore = 0;
+        let unlocked = [true, false, false];
+        
+        function goHome() {
+            document.getElementById("game-screen").style.display = "none";
+            if (document.getElementById("practice-modal").style.display === "flex") {
+                hidePractice();
+            }
+        }
+        
+        function startLevel(lvl) {
+            if (!unlocked[lvl-1]) return alert("🔒 Уровень ещё не открыт!");
+            
+            currentLevel = lvl;
+            currentQ = 0;
+            levelScore = 0;
+            
+            document.getElementById("level-num").textContent = lvl;
+            document.getElementById("q-num").textContent = "1";
+            document.getElementById("level-score").textContent = "0";
+            
+            document.getElementById("game-screen").style.display = "flex";
+            loadQuestion();
+        }
+        
+        function loadQuestion() {
+            const qs = levels[currentLevel];
+            if (currentQ >= qs.length) {
+                endLevel(true);
+                return;
+            }
+            
+            document.getElementById("q-num").textContent = currentQ + 1;
+            const qData = qs[currentQ];
+            document.getElementById("question").innerHTML = `
+                <strong>Вопрос ${currentQ+1}:</strong><br>
+                ${qData.q}<br>
+                <small style="opacity:0.7;">${qData.hint || ""}</small>
+            `;
+            
+            const mcqDiv = document.getElementById("mcq-options");
+            const fillInput = document.getElementById("fill-input");
+            
+            mcqDiv.innerHTML = "";
+            fillInput.style.display = "none";
+            
+            if (qData.type === "mcq") {
+                qData.opts.forEach((opt, i) => {
+                    const btn = document.createElement("div");
+                    btn.className = "option-btn";
+                    btn.textContent = opt;
+                    btn.onclick = () => selectMCQ(i);
+                    mcqDiv.appendChild(btn);
+                });
+                mcqDiv.style.display = "flex";
+            } else {
+                fillInput.style.display = "block";
+                fillInput.focus();
+                mcqDiv.style.display = "none";
+            }
+        }
+        
+        let selectedMCQ = -1;
+        function selectMCQ(idx) {
+            selectedMCQ = idx;
+            const btns = document.querySelectorAll(".option-btn");
+            btns.forEach((b, i) => b.style.background = i === idx ? "#00ff9d" : "#2a0055");
+        }
+        
+        function submitAnswer() {
+            const qs = levels[currentLevel];
+            const qData = qs[currentQ];
+            let userAns = "";
+            
+            if (qData.type === "mcq") {
+                if (selectedMCQ === -1) return alert("Выбери вариант!");
+                userAns = selectedMCQ;
+            } else {
+                userAns = document.getElementById("fill-input").value.trim();
+            }
+            
+            let correct = false;
+            if (qData.type === "mcq") {
+                correct = userAns === qData.ans;
+            } else {
+                const cleanUser = userAns.toLowerCase().replace(/\s+/g, "");
+                const cleanAns = String(qData.ans).toLowerCase().replace(/\s+/g, "");
+                correct = cleanUser === cleanAns || cleanUser.includes(cleanAns);
+            }
+            
+            showFeedback(correct);
+            
+            if (correct) {
+                levelScore += 100;
+                document.getElementById("level-score").textContent = levelScore;
+            }
+            
+            setTimeout(() => {
+                selectedMCQ = -1;
+                currentQ++;
+                loadQuestion();
+            }, 1200);
+        }
+        
+        function skipQuestion() {
+            currentQ++;
+            loadQuestion();
+        }
+        
+        function showFeedback(isCorrect) {
+            const fb = document.getElementById("feedback");
+            fb.style.display = "block";
+            fb.textContent = isCorrect ? "✅ ВЕРНО!" : "❌ ОШИБКА";
+            fb.className = "feedback " + (isCorrect ? "correct" : "wrong");
+            
+            const rocket = document.querySelector(".rocket");
+            rocket.style.transform = isCorrect ? "translateY(-120px)" : "translateY(20px)";
+            
+            setTimeout(() => {
+                fb.style.display = "none";
+                rocket.style.transform = "translateY(0)";
+            }, 1400);
+        }
+        
+        function endLevel(win) {
+            totalScore += levelScore;
+            document.getElementById("score-val").textContent = totalScore;
+            
+            if (win && currentLevel < 3) {
+                unlocked[currentLevel] = true;
+                document.getElementById("lvl" + (currentLevel + 1)).classList.remove("locked");
+                alert(`🎉 УРОВЕНЬ ${currentLevel} ПРОЙДЕН!\nОчки: ${levelScore}\n\nСледующий уровень открыт!`);
+            } else if (win) {
+                alert(`🏆 ВЫ ЗАПУСТИЛИ РАКЕТУ ЗНАНИЙ!\nОбщий счёт: ${totalScore}\nТы теперь мастер C#!`);
+            }
+            
+            document.getElementById("game-screen").style.display = "none";
+        }
+        
+        function showPractice() {
+            document.getElementById("practice-modal").style.display = "flex";
+            document.getElementById("result1").innerHTML = "";
+            document.getElementById("result2").innerHTML = "";
+            document.getElementById("result3").innerHTML = "";
+        }
+        
+        function hidePractice() {
+            document.getElementById("practice-modal").style.display = "none";
+        }
+        
+        function checkCode(num) {
+            let code = "";
+            let resultDiv = "";
+            
+            if (num === 1) {
+                code = document.getElementById("code1").value.toLowerCase();
+                resultDiv = document.getElementById("result1");
+                if (code.includes("for") && code.includes("i--") && code.includes("console")) {
+                    resultDiv.innerHTML = `<span style="color:#0f0;">✅ Отлично!</span>`;
+                } else {
+                    resultDiv.innerHTML = `<span style="color:#f66;">Нужно for (int i=n; i&gt;0; i--)</span>`;
+                }
+            } else if (num === 2) {
+                code = document.getElementById("code2").value.toLowerCase();
+                resultDiv = document.getElementById("result2");
+                if (code.includes("if") && code.includes("else") && code.includes("положительное")) {
+                    resultDiv.innerHTML = `<span style="color:#0f0;">✅ Верно!</span>`;
+                } else {
+                    resultDiv.innerHTML = `<span style="color:#f66;">Нужно if-else</span>`;
+                }
+            } else if (num === 3) {
+                code = document.getElementById("code3").value.toLowerCase();
+                resultDiv = document.getElementById("result3");
+                if ((code.includes(">=") || code.includes(">")) && (code.includes("--") || code.includes("i-"))) {
+                    resultDiv.innerHTML = `<span style="color:#0f0;">✅ Пропуск заполнен правильно!</span>`;
+                } else {
+                    resultDiv.innerHTML = `<span style="color:#f66;">Нужно i &gt;= 0 и i--</span>`;
+                }
+            }
+        }
+        
+        function copyCode(num) {
+            let txt = "";
+            if (num === 1) {
+                txt = `int n = Convert.ToInt32(Console.ReadLine());
+for (int i = n; i > 0; i--)
+    Console.WriteLine(i);
+Console.WriteLine("Start!");`;
+            } else if (num === 2) {
+                txt = `int num = Convert.ToInt32(Console.ReadLine());
+if (num > 0)
+    Console.WriteLine("Положительное");
+else
+    Console.WriteLine("Отрицательное или ноль");`;
+            } else if (num === 3) {
+                txt = `for (int i = n; i >= 0; i--)`;
+            }
+            navigator.clipboard.writeText(txt).then(() => alert("✅ Код скопирован в буфер!"));
+        }
+        
+        function openCompiler() {
+            window.open("https://dotnetfiddle.net/", "_blank");
+        }
+        
+        window.onload = () => {
+            document.getElementById("lvl1").click();
+        };
+    </script>
 </body>
 </html>
